@@ -7,3 +7,5 @@ the call stack keeps track of all the code
 an event call back kpair is when a fucntion is being ran by api and then return back to the call stackß
 
 node api alloows asyc fucntions to runs
+
+encodeURI allows special chars to be rran in the url so the search dont crash
