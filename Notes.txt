@@ -1,0 +1,9 @@
+****The evnt loop
+
+the call stack keeps track of all the code
+-it mian i sthe first functio to get added becuas enode wrapped our code
+-the call stack top runs befroe the bottom
+
+an event call back kpair is when a fucntion is being ran by api and then return back to the call stackß
+
+node api alloows asyc fucntions to runs
