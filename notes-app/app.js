@@ -30,25 +30,46 @@ yargs.command({
 
 yargs.command({
   command: "remove",
+  builder: {
+    title: {
+      describe: "Title",
+      demandOption: true,
+      type: "string",
+    },
+  },
   describe: "remove note",
-  handler: () => {
-    console.log("remove this note");
+  handler: (argv) => {
+    console.log(notes.removeNote(argv.title));
   },
 });
 
 yargs.command({
   command: "list",
+  // builder: {
+  //   title: {
+  //     describe: "List notes",
+  //     demandOption: true,
+  //     type: "string",
+  //   },
+  // },
   describe: "list notes",
-  handler: () => {
-    console.log("list all notes");
+  handler: (argv) => {
+    notes.listNotes(argv.title);
   },
 });
 
 yargs.command({
   command: "read",
+  builder: {
+    title: {
+      describe: "Title",
+      demandOption: true,
+      type: "string",
+    },
+  },
   describe: "read note",
-  handler: () => {
-    console.log("read this note");
+  handler: (argv) => {
+    notes.readNote(argv.title);
   },
 });
 

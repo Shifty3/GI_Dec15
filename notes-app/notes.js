@@ -1,4 +1,5 @@
 const fs = require("fs");
+const chalk = require("chalk");
 
 const getNote = () => {
   return "Your notes";
@@ -7,11 +8,9 @@ const getNote = () => {
 const addNote = (title, body) => {
   const newNote = loadNotes();
 
-  const dubNotes = newNote.filter((note) => {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.find((note) => note.title === title);
 
-  if (dubNotes.length === 0) {
+  if (!duplicateNotes) {
     //cretaing object to store values
     newNote.push({
       title: title,
@@ -21,6 +20,41 @@ const addNote = (title, body) => {
     savedNotes(newNote);
   } else {
     console.log("note title taken");
+  }
+};
+
+const removeNote = (title) => {
+  const notes = loadNotes();
+  const notesToKeep = notes.filter((note) => {
+    return note.title !== title;
+  });
+
+  if (notes.length > notesToKeep.length) {
+    console.log(chalk.green.inverse("Note Removed"));
+  } else {
+    console.log(chalk.red.inverse("No note found"));
+  }
+
+  savedNotes(notesToKeep);
+};
+
+const listNotes = () => {
+  const notes = loadNotes();
+
+  notes.forEach((note) => {
+    console.log(note.title);
+  });
+};
+
+const readNote = (title) => {
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    console.log(chalk.inverse(note.title));
+    console.log(note.body);
+  } else {
+    console.log("No note was found");
   }
 };
 
@@ -44,4 +78,7 @@ const loadNotes = () => {
 module.exports = {
   getNote: getNote,
   addNote: addNote,
+  removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote,
 };

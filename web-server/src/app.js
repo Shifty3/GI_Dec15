@@ -7,7 +7,7 @@ const app = express();
 
 //define paths for expres config
 const pubDirPath = path.join(__dirname, "../public");
-const viewsPath = path.join(__dirname, "../tempates/views");
+const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
 //set handle bars for engine and views location
 app.set("view engine", "hbs");
@@ -48,4 +48,10 @@ app.get("/weather", (req, res) => {
 //starting a server
 app.listen(3000, () => {
   console.log("SERVER IS UP");
+});
+
+app.get("/shoes", (res, req) => {
+  req.send({
+    products: [],
+  });
 });
