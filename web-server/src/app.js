@@ -3,7 +3,6 @@ const express = require("express");
 const hbs = require("hbs");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
-const { error } = require("console");
 
 //calls on express
 const app = express();
@@ -42,6 +41,13 @@ app.get("/help", (req, res) => {
   });
 });
 
+// app.get("/weather", (req, res) => {
+//   res.send({
+//     forecast: "its is snowing",
+//     location: "philly",
+//   });
+// });
+
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({
@@ -67,11 +73,11 @@ app.get("/weather", (req, res) => {
     });
   });
 
-  res.send({
-    forecast: "it is snowing",
-    location: "buffalo",
-    address: req.query.address,
-  });
+  // res.send({
+  //   forecast: "it is snowing",
+  //   location: "buffalo",
+  //   address: req.query.address,
+  // });
 });
 
 app.get("/products", (req, res) => {
@@ -104,6 +110,6 @@ app.get("/*", (req, res) => {
 });
 
 //starting a server
-app.listen(3001, () => {
+app.listen(3005, () => {
   console.log("SERVER IS UP");
 });

@@ -15,7 +15,7 @@ const geocode = (address, callback) => {
         //getting the latitude and longitude and return the address from the api
         lat: response.body.features[0].properties.coordinates.latitude,
         long: response.body.features[0].properties.coordinates.longitude,
-        location: response.body.features[1].properties.full_address,
+        location: response.body.features[0].properties.full_address,
       });
     }
   });
