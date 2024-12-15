@@ -117,6 +117,6 @@ app.get("/*", (req, res) => {
 });
 
 //starting a server
-app.listen(3005, () => {
+app.listen(port, () => {
   console.log("SERVER IS UP");
 });
