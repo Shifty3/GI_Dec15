@@ -73,4 +73,19 @@ yargs.command({
   },
 });
 
+yargs.command({
+  command: "edit",
+  builder: {
+    title: {
+      describe: "Edit",
+      demandOption: true,
+      type: "string",
+    },
+  },
+  describe: "Edit your notes",
+  handler: (argv) => {
+    notes.editNotes(argv.title, argv.body);
+  },
+});
+
 console.log(yargs.argv);

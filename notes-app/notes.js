@@ -1,5 +1,6 @@
 const fs = require("fs");
 const chalk = require("chalk");
+const { title } = require("process");
 
 const getNote = () => {
   return "Your notes";
@@ -58,6 +59,17 @@ const readNote = (title) => {
   }
 };
 
+const editNotes = (title, body) => {
+  const notes = loadNotes();
+  const note = notes.find((note) => note.title === title);
+
+  if (note) {
+    note.body = body;
+  }
+
+  savedNotes(notes);
+};
+
 const savedNotes = (notes) => {
   //changing the json file to whatever the input was
   const dataJSON = JSON.stringify(notes);
@@ -81,4 +93,5 @@ module.exports = {
   removeNote: removeNote,
   listNotes: listNotes,
   readNote: readNote,
+  editNotes: editNotes,
 };

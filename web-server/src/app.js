@@ -22,21 +22,21 @@ app.use(express.static(pubDirPath));
 //creating different routes for users
 app.get("", (req, res) => {
   res.render("index", {
-    title: "Weather app",
+    title: "Weather App",
     name: "ismael martinez",
   });
 });
 
 app.get("/about", (req, res) => {
   res.render("about", {
-    title: "about page",
+    title: "About Page",
     name: "Ismael Martinez",
   });
 });
 
 app.get("/help", (req, res) => {
   res.render("help", {
-    title: "Ismael",
+    title: "Help",
     name: "Ismael",
   });
 });
