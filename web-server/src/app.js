@@ -20,13 +20,14 @@ app.use(express.static(pubDirPath));
 //creating different routes for users
 app.get("", (req, res) => {
   res.render("index", {
-    title: "weather app",
+    title: "Weather app",
     name: "ismael martinez",
   });
 });
 
 app.get("/help", (req, res) => {
   res.render("help", {
+    title: "Ismael",
     name: "Ismael",
   });
 });
