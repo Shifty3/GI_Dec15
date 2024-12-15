@@ -1,20 +1,21 @@
-const request = require("request");
+const request = require("postman-request");
 
-const geocode = (adress, callback) => {
-  const url =
-    "https://api.mapbox.com/search/geocode/v6/forward?q=" +
-    adress +
-    "s&access_token=pk.eyJ1IjoiaXp6eW0yMyIsImEiOiJjbTRtcmhibm4wMGR2Mm1xNHU3cWZ5bTJyIn0.2U3aFrc8wQotcxgKWtsr4w&limit=1";
+const geocode = (address, callback) => {
+  //concating the address to search for wherever we want
+  const url = `https://api.mapbox.com/search/geocode/v6/forward?q=${encodeURIComponent(
+    address
+  )}&access_token=pk.eyJ1IjoiaXp6eW0yMyIsImEiOiJjbTRtcmhibm4wMGR2Mm1xNHU3cWZ5bTJyIn0.2U3aFrc8wQotcxgKWtsr4w&limit=1`;
   request({ url: url, json: true }, (error, response) => {
     if (error) {
-      callback("unable to connect to location srvices", undefined);
+      callback("unable to connect to location services", undefined);
     } else if (response.body.features.length === 0) {
       callback("unable to find location. try another search", undefined);
     } else {
       callback(undefined, {
-        lat: response.body.features[0].geometry.coordinates[0],
-        long: response.body.features[0].geometry.coordinates[1],
-        location: response.body.features[0].properties.name,
+        //getting the latitude and longitude and return the address from the api
+        lat: response.body.features[0].properties.coordinates.latitude,
+        long: response.body.features[0].properties.coordinates.longitude,
+        location: response.body.features[0].properties.full_address,
       });
     }
   });

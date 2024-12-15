@@ -1,6 +1,9 @@
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
+const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
+const { error } = require("console");
 
 //calls on express
 const app = express();
@@ -25,13 +28,6 @@ app.get("", (req, res) => {
   });
 });
 
-app.get("/help", (req, res) => {
-  res.render("help", {
-    title: "Ismael",
-    name: "Ismael",
-  });
-});
-
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "about page",
@@ -39,20 +35,75 @@ app.get("/about", (req, res) => {
   });
 });
 
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "Ismael",
+    name: "Ismael",
+  });
+});
+
 app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Must provide a address",
+    });
+  }
+
+  geocode(req.query.address, (error, { lat, long, location }) => {
+    if (error) {
+      return res.send({ error });
+    }
+
+    forecast(lat, long, (error, forecastData) => {
+      if (error) {
+        return res.send({ error });
+      }
+
+      return res.send({
+        forecast: forecastData,
+        location,
+        address: req.query.address,
+      });
+    });
+  });
+
   res.send({
-    forecase: "it is snowing",
+    forecast: "it is snowing",
     location: "buffalo",
+    address: req.query.address,
+  });
+});
+
+app.get("/products", (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: "You must provide a search term",
+    });
+  }
+
+  res.send({
+    products: [],
+  });
+});
+
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Ismael",
+    errorMessage: "Help article not found",
+  });
+});
+
+//gonna catching any request that doesnt match
+app.get("/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    name: "Ismael",
+    errorMessage: "Page Not Found",
   });
 });
 
 //starting a server
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("SERVER IS UP");
-});
-
-app.get("/shoes", (res, req) => {
-  req.send({
-    products: [],
-  });
 });

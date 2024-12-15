@@ -11,3 +11,5 @@ node api alloows asyc fucntions to runs
 encodeURI allows special chars to be rran in the url so the search dont crash
 
 destructuring allows you to take multiple properties forom a object and assign them to vars in a more readable way
+
+cant send two responses in a html request

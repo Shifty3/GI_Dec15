@@ -1,4 +1,3 @@
-const request = require("request");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
@@ -11,9 +10,8 @@ if (!adress) {
     if (error) {
       return console.log(error);
     }
-
-    console.log("erroer", error);
     console.log("daat", data);
+
     forecast(data.lat, data.long, (error, forecastData) => {
       if (error) {
         return console.log(error);
