@@ -4,14 +4,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather</title>
     <link rel="stylesheet" href="./css/styles.css" />
-    <script src="/js/app.js"></script>
+   
   </head>
   <body>
     <div class="main">
-          {{>header}}
+       {{>header}}
+       
+
+          <p>Use this site for your Weather!</p>
+
+          <form>
+            <input type="text" placeholder="address, city, ot zip code here">
+            <button>Search</button>
+          </form>
+
+          <p class="msg1"></p>
+          <p class="msg2"></p>
+
+          <select name="Temp Measurement" id="unit">
+            <option value="f">Fahrenheit</option>
+            <option value="m">Celsius</option>
+            <option value="s">Kelvin</option>
+          </select>
     </div>
 
     {{>footer}}
+
+     <script src="/js/app.js"></script>
   </body>
 
 </html>
