@@ -18,7 +18,7 @@ form.addEventListener("submit", (e) => {
     msg2.textContent = "Please try again!";
   } else {
     fetch(
-      `http://localhost:3005/weather?address=${location}&units=${
+      `/weather?address=${location}&units=${
         select.options[select.selectedIndex].value
       }`
     ).then((response) => {
